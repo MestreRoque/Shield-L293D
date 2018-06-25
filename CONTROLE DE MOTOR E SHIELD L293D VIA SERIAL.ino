@@ -1,4 +1,4 @@
-/* PROGRAMA PARA CONTROLE DE MOTOR E SHIELD L293D VIA SERIAL
+/* PROGRAMA PARA CONTROLE DE MOTOR E SHIELD L293D VIA COMUNICAÇÃO SERIAL
 * AUTOR: FELIPE ROQUE DE ALBUQUERQUE NETO
 * CO-AUTOR: RAPHAEL DE MEDEIROS SOUTO MAIOR BALTAR
 * CREDITOS: SIMON MONK & WAGNER RAMBO
@@ -17,16 +17,17 @@ void sendCommand(unsigned char value);   //Função para enviar o byte para saí
 
 
 // --- Configurações Iniciais ---
+
 void setup() 
 {
-  pinMode(dir_clk, OUTPUT);    //saída para clock
-  pinMode(dir_ser, OUTPUT);    //saída para dados
-  pinMode(dir_latch, OUTPUT);    //saída para latch
+  pinMode(dir_clk, OUTPUT);      //saída para clock
+  pinMode(dir_ser, OUTPUT);     //saída para dados
+  pinMode(dir_latch, OUTPUT);  //saída para latch
   pinMode(dir_en, OUTPUT);    //saída para enable
   pinMode(pwm2a, OUTPUT);    //saída para pwm motor1
   Serial.begin(9600);
   
- // digitalWrite(dir_en, LOW); /* Seria no caso de eu não quiser fazer o controle do pwm utilizando a serial*/
+ // digitalWrite(dir_en, LOW); /* Seria o caso de não necessitar realizar o controle do PWM utilizando a serial*/
  // analogWrite(pwm2a, 0xFF);
  // analogWrite(pwm2b, 0xFF);
  // analogWrite(pwm0a, 0xFF);
@@ -71,8 +72,7 @@ void sendCommand(unsigned char value)
        digitalWrite(dir_clk, HIGH);
     
     } //end for
-    
-    
+  
     digitalWrite(dir_clk, LOW);
     
     digitalWrite(dir_latch, HIGH);
